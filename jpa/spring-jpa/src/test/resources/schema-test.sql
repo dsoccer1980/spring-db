@@ -1,0 +1,20 @@
+DROP TABLE IF EXISTS Book;
+DROP TABLE IF EXISTS Author;
+DROP INDEX IF EXISTS author_name;
+
+
+
+CREATE TABLE Author(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255)
+);
+CREATE UNIQUE INDEX author_name ON Author (name);
+
+CREATE TABLE Book (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) ,
+  author_id BIGINT,
+
+  CONSTRAINT name_author UNIQUE (name, author_id),
+  FOREIGN KEY(author_id) REFERENCES Author(id) ON DELETE CASCADE
+)
