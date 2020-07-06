@@ -1,7 +1,6 @@
 package ru.dsoccer1980;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,7 +60,8 @@ public class Main {
 
 
   private Connection getConnection() throws SQLException {
-    Connection connection = DriverManager.getConnection(URL);
+//    Connection connection = DriverManager.getConnection(URL);
+    Connection connection = HikariCPDataSource.getConnection();
     connection.setAutoCommit(false);
     return connection;
   }
