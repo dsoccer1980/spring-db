@@ -22,16 +22,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan({"ru.dsoccer1980.dao"})
 public class SpringTestConfiguration {
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//
+//        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+//        EmbeddedDatabase db = builder
+//                .setType(EmbeddedDatabaseType.H2)
+//                .addScript("schema-test.sql")
+//                .build();
+//        return db;
+//    }
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("schema-test.sql")
-                .build();
-        return db;
+       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/testdb");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
+        return dataSource;
     }
 
     @Bean
