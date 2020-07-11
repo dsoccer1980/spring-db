@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
+import ru.dsoccer1980.dto.CompanyPhoneDto;
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao {
@@ -59,5 +60,12 @@ public class CompanyDaoImpl implements CompanyDao {
   public List<Company> getAll() {
     TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class);
     return query.getResultList();
+  }
+
+  @Override
+  public List<CompanyPhoneDto> getCompanyPhone() {
+    return entityManager
+        .createQuery("Select new ru.dsoccer1980.dto.CompanyPhoneDto(c.name, c.contactPerson.phone) from Company c", CompanyPhoneDto.class)
+        .getResultList();
   }
 }

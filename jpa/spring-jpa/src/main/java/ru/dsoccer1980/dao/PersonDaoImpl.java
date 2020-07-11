@@ -1,15 +1,17 @@
 package ru.dsoccer1980.dao;
 
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
 
 @Repository
+//@SuppressWarnings("JpaQlInspection")
 public class PersonDaoImpl implements PersonDao {
 
   @PersistenceContext
@@ -40,5 +42,17 @@ public class PersonDaoImpl implements PersonDao {
     Query query = entityManager.createQuery("DELETE FROM Person");
     query.executeUpdate();
 
+  }
+
+  @Override
+  public List<Person> getAll() {
+    return entityManager.createQuery("Select p from Person p", Person.class).getResultList();
+  }
+
+  @Override
+  @Transactional
+  public void testQuery(Long id1, Long id2) {
+    Person person = new Person("person");
+    entityManager.persist(person);;
   }
 }

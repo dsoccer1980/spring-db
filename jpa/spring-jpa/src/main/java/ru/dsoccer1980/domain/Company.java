@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Data
@@ -21,15 +24,15 @@ public class Company {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
-
   @Column(name = "company_name")
   private String name;
-
   @Embedded
   private ContactPerson contactPerson;
 
   @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  List<Person> persons;
+  //@Fetch(FetchMode.SUBSELECT)
+      // @BatchSize(size=3)
+      List<Person> persons;
 
   public Company(String name, ContactPerson contactPerson) {
     this.name = name;

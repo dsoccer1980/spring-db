@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
+import ru.dsoccer1980.dto.CompanyPhoneDto;
 
 public interface CompanyDao {
 
@@ -18,4 +19,6 @@ public interface CompanyDao {
   Optional<Company> getCompanyWithPerson(Company company);
 
   List<Company> getAll();
+
+  List<CompanyPhoneDto> getCompanyPhone();
 }

@@ -1,5 +1,6 @@
 package ru.dsoccer1980.dao;
 
+import java.util.List;
 import java.util.Optional;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
@@ -14,4 +15,7 @@ public interface PersonDao {
 
   void deleteAll();
 
+  List<Person> getAll();
+
+  void testQuery(Long id1, Long id2);
 }

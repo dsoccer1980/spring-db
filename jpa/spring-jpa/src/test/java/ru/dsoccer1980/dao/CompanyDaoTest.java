@@ -3,7 +3,6 @@ package ru.dsoccer1980.dao;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +43,7 @@ public class CompanyDaoTest {
 
   }
 
- // @BeforeEach
+  // @BeforeEach
   @Transactional
   void save2() {
     companyDao.deleteAll();
@@ -71,6 +70,20 @@ public class CompanyDaoTest {
   void getAll() {
     System.out.println("-------------------");
     System.out.println(companyDao.getAll());
+  }
+
+  @Test
+  void getPersonName() {
+    System.out.println("-------------------");
+    personDao.testQuery(3L, 4L);
+//    Person person1 = entityManager.find(Person.class, 1);
+//    Person person2 = entityManager.find(Person.class, 2);
+//    person1.getCompany().getName();
+  }
+
+  @Test
+  void getCompanyPhone() {
+    System.out.println(companyDao.getCompanyPhone());
   }
 
 
