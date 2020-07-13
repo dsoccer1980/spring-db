@@ -21,4 +21,6 @@ public interface CompanyDao {
   List<Company> getAll();
 
   List<CompanyPhoneDto> getCompanyPhone();
+
+  List<Company> getAllWithGraph();
 }

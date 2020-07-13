@@ -73,6 +73,13 @@ public class CompanyDaoTest {
   }
 
   @Test
+  void getAllWithGraph() {
+    System.out.println("-------------------");
+    System.out.println(companyDao.getAllWithGraph());
+  }
+
+
+  @Test
   void getPersonName() {
     System.out.println("-------------------");
     personDao.testQuery(3L, 4L);

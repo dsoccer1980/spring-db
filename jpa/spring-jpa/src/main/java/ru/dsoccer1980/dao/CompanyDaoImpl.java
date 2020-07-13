@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import org.hibernate.annotations.QueryHints;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Company;
@@ -67,5 +68,14 @@ public class CompanyDaoImpl implements CompanyDao {
     return entityManager
         .createQuery("Select new ru.dsoccer1980.dto.CompanyPhoneDto(c.name, c.contactPerson.phone) from Company c", CompanyPhoneDto.class)
         .getResultList();
+  }
+
+  @Override
+  public List<Company> getAllWithGraph() {
+    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
+        .setHint(QueryHints.FETCHGRAPH, entityManager.getEntityGraph(Company.GRAPH_WITH_PERSONS));
+    List<Company> resultList = query.getResultList();
+    resultList.forEach(c -> c.getPersons().size());
+    return resultList;
   }
 }
