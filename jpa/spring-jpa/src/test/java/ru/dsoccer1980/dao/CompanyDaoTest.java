@@ -73,6 +73,12 @@ public class CompanyDaoTest {
   }
 
   @Test
+  void getAllWithNamedGraph() {
+    System.out.println("-------------------");
+    System.out.println(companyDao.getAllWithNamedGraph());
+  }
+
+  @Test
   void getAllWithGraph() {
     System.out.println("-------------------");
     System.out.println(companyDao.getAllWithGraph());

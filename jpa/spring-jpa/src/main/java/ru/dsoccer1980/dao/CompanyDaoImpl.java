@@ -3,6 +3,7 @@ package ru.dsoccer1980.dao;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -71,11 +72,24 @@ public class CompanyDaoImpl implements CompanyDao {
   }
 
   @Override
-  public List<Company> getAllWithGraph() {
+  public List<Company> getAllWithNamedGraph() {
     TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
         .setHint(QueryHints.FETCHGRAPH, entityManager.getEntityGraph(Company.GRAPH_WITH_PERSONS));
     List<Company> resultList = query.getResultList();
     resultList.forEach(c -> c.getPersons().size());
     return resultList;
   }
+
+  @Override
+  public List<Company> getAllWithGraph() {
+    EntityGraph<Company> graph = entityManager.createEntityGraph(Company.class);
+    graph.addAttributeNodes("persons");
+    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
+        .setHint(QueryHints.FETCHGRAPH, graph);
+    List<Company> resultList = query.getResultList();
+    resultList.forEach(c -> c.getPersons().size());
+    return resultList;
+  }
+
+
 }
