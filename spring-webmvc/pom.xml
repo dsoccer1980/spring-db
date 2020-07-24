@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>webmvc</module>
+    <module>spring-boot-mvc</module>
   </modules>
 
 

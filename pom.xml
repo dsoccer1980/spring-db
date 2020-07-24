@@ -12,6 +12,7 @@
     <module>jdbc</module>
     <module>jpa</module>
     <module>datajpa</module>
+    <module>spring-webmvc</module>
   </modules>
 
 
