@@ -6,7 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Author;
@@ -73,4 +78,21 @@ public class AuthorDaoImpl implements AuthorDao {
         Query query = em.createQuery("DELETE FROM Author");
         query.executeUpdate();
     }
+
+
+    @Override
+    public void getCriteria() {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Author.class)
+            .add(Property.forName("name").eq("Denis"))
+            .add(Property.forName("processed").isNull())
+            .setProjection(Projections.property("name"));
+        SessionFactory sessionFactory=em.getEntityManagerFactory().unwrap(SessionFactory.class);
+        HibernateTemplate hibernate = new HibernateTemplate(sessionFactory);
+        List<String> byCriteria = (List<String>)hibernate.findByCriteria(detachedCriteria);
+        byCriteria.forEach(System.out::println);
+
+
+    }
+
+
 }

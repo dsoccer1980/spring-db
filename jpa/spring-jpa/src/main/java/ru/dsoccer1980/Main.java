@@ -14,13 +14,12 @@ public class Main {
     AuthorDao authorDao = applicationContext.getBean(AuthorDao.class);
     BookDao bookDao = applicationContext.getBean(BookDao.class);
 
+    authorDao.insert(new Author("Denis"));
+
     authorDao.getAll().forEach(System.out::println);
     bookDao.getAll().forEach(System.out::println);
 
-    try {
-      authorDao.insert(new Author("Sasa"));
-    } catch (org.springframework.transaction.TransactionSystemException e) {
-      System.out.println("ConstraintViolation");
-    }
+    authorDao.getCriteria();
+
   }
 }

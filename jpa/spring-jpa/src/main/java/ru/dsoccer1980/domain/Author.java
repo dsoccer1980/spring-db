@@ -20,7 +20,15 @@ public class Author {
     @Size(min = 5)
     private String name;
 
+    @Column(name = "toodeldud")
+    private String processed;
+
     public Author(String name) {
         this.name = name;
+    }
+
+    public Author(Long id, String name) {
+        this.name = name;
+        this.id = id;
     }
 }
