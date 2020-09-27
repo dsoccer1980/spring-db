@@ -2,6 +2,7 @@ package ru.dsoccer1980.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.dsoccer1980.model.User;
 import ru.dsoccer1980.repository.UserRepository;
@@ -17,6 +19,8 @@ import ru.dsoccer1980.repository.UserRepository;
 public class AuthProviderImpl implements AuthenticationProvider {
 
   private final UserRepository userRepository;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public AuthProviderImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -31,7 +35,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
       throw new UsernameNotFoundException("User not found");
     }
     String password = authentication.getCredentials().toString();
-    if (!password.equals(user.getPassword())) {
+    if (!passwordEncoder.matches(password, user.getPassword())) {
       throw new BadCredentialsException("Invalid credentials");
     }
     List<GrantedAuthority> authorities = new ArrayList<>();

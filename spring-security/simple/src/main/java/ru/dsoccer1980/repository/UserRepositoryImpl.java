@@ -8,6 +8,6 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public User findByName(String username) {
-    return new User(1, "denis", "123");
+    return new User(1, "denis", "$2y$12$gd7YpDujHC7lnbf.cFRyAu8uThmRCGr0cxIwt0UsaYvl6BHPeig0i");
   }
 }
