@@ -8,7 +8,7 @@ public class MyRestController {
 
   @GetMapping
   public String index() {
-    return "Hiii";
+    return "Hiii <a href=\"my\">my</a>";
   }
 
 }
