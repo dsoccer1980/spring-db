@@ -13,6 +13,7 @@
     <module>jpa</module>
     <module>datajpa</module>
     <module>spring-webmvc</module>
+    <module>spring-security</module>
   </modules>
 
 
