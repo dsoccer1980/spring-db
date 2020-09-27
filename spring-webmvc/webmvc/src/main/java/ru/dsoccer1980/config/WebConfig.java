@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan("ru.dsoccer1980")
 public class WebConfig implements WebMvcConfigurer {
 
-  @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
   }
