@@ -17,5 +17,9 @@ public interface PersonDao {
 
   List<Person> getAll();
 
+  List<Person> getPersonsWithCompany();
+
+  List<Person> getPersonsWithCompanyEntityGraph();
+
   void testQuery(Long id1, Long id2);
 }
