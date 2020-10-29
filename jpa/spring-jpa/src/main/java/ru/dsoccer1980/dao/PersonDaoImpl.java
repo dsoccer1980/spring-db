@@ -28,6 +28,23 @@ public class PersonDaoImpl implements PersonDao {
 
   @Override
   @Transactional
+  public void addCompanyById(Person person, long id) {
+    Company refCompany = entityManager.getReference(Company.class, id);
+    person.setCompany(refCompany);
+    entityManager.merge(person);
+  }
+
+  @Override
+  @Transactional
+  public void addCompanyByPersonIdAndCompanyId(long personId, long companyId) {
+    Person person = entityManager.getReference(Person.class, personId);
+    Company refCompany = entityManager.getReference(Company.class, companyId);
+    person.setCompany(refCompany);
+    entityManager.merge(person);
+  }
+
+  @Override
+  @Transactional
   public void addCompany(Person person, Company company) {
     Company refCompany = entityManager.getReference(Company.class, company.getId());
     person.setCompany(refCompany);
@@ -44,12 +61,36 @@ public class PersonDaoImpl implements PersonDao {
   public void deleteAll() {
     Query query = entityManager.createQuery("DELETE FROM Person");
     query.executeUpdate();
+  }
 
+  @Override
+  @Transactional
+  public void deleteById(long id) {
+    Person person = entityManager.getReference(Person.class, id);
+    entityManager.remove(person);
+  }
+
+  @Override
+  @Transactional
+  public void delete(Person person) {
+    entityManager.remove(person);
+  }
+
+  @Override
+  public Person getReference(long id) {
+    return entityManager.getReference(Person.class, id);
   }
 
   @Override
   public List<Person> getAll() {
-    return entityManager.createQuery("Select p from Person p", Person.class).getResultList();
+    return entityManager.createQuery("Select p from Person p ORDER BY p.company.id NULLS LAST", Person.class).getResultList();
+  }
+
+  @Override
+  public List<Person> getAllWithNamedQuery() {
+    return entityManager.createNamedQuery("all person", Person.class)
+        .setParameter("name", "pers1")
+        .getResultList();
   }
 
   @Override

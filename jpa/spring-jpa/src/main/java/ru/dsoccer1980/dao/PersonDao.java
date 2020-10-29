@@ -9,13 +9,25 @@ public interface PersonDao {
 
   void insert(Person person);
 
+  void addCompanyById(Person person, long id);
+
+  void addCompanyByPersonIdAndCompanyId(long personId, long companyId);
+
   void addCompany(Person person, Company company);
 
   Optional<Person> getById(long id);
 
   void deleteAll();
 
+  void deleteById(long id);
+
+  void delete(Person person);
+
+  Person getReference(long id);
+
   List<Person> getAll();
+
+  List<Person> getAllWithNamedQuery();
 
   List<Person> getPersonsWithCompany();
 
