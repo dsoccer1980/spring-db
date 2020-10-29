@@ -15,6 +15,7 @@
     <module>spring-jpa</module>
     <module>spring-boot-jpa</module>
     <module>clean-jpa</module>
+    <module>spring-hibernate-session</module>
   </modules>
 
 
