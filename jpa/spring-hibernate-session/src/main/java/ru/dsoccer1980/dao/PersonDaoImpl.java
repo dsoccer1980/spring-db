@@ -15,14 +15,19 @@ import org.hibernate.annotations.QueryHints;
 import org.hibernate.jdbc.ReturningWork;
 import org.hibernate.jdbc.Work;
 import org.hibernate.query.NativeQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.dsoccer1980.Main;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
 
 @Repository
 @SuppressWarnings("JpaQlInspection")
 public class PersonDaoImpl implements PersonDao {
+
+  private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
   @PersistenceContext
   private Session session;
@@ -103,6 +108,7 @@ public class PersonDaoImpl implements PersonDao {
 
   @Override
   public List<Person> getAll() {
+    logger.info("Show all persons");
     return session.createQuery("Select p from Person p ORDER BY p.company.id NULLS LAST", Person.class).getResultList();
   }
 
