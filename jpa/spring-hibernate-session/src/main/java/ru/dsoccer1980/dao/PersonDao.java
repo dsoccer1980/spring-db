@@ -36,4 +36,10 @@ public interface PersonDao {
   List<Person> getPersonsWithCompanyEntityGraph();
 
   void testQuery(Long id1, Long id2);
+
+  String doNativeQuery(long id);
+
+  void doWorkNativeSql();
+
+  String doReturnWorkNativeSql(long id);
 }

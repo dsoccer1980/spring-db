@@ -1,5 +1,9 @@
 package ru.dsoccer1980.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityGraph;
@@ -8,6 +12,9 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.annotations.QueryHints;
+import org.hibernate.jdbc.ReturningWork;
+import org.hibernate.jdbc.Work;
+import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Company;
@@ -125,5 +132,40 @@ public class PersonDaoImpl implements PersonDao {
   public void testQuery(Long id1, Long id2) {
     Person person = new Person("person");
     session.persist(person);;
+  }
+
+  @Override
+  public String doNativeQuery(long id) {
+    NativeQuery nativeQuery = session.createNativeQuery("SELECT person_name FROM Person Where id=?");
+    nativeQuery.setParameter(1, id);
+    return  (String)nativeQuery.getSingleResult();
+  }
+
+  @Override
+  @Transactional
+  public void doWorkNativeSql() {
+    session.doWork(new Work() {
+      @Override
+      public void execute(Connection connection) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Person(person_name) VALUES('FFFFF')");
+        preparedStatement.execute();
+      }
+    });
+  }
+
+  @Override
+  public String doReturnWorkNativeSql(long id) {
+    return session.doReturningWork(new ReturningWork<String>() {
+      @Override
+      public String execute(Connection connection) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT person_name FROM Person Where id=?");
+        preparedStatement.setLong(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+          return resultSet.getString(1);
+        }
+        return "no";
+      }
+    });
   }
 }
