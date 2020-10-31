@@ -1,6 +1,7 @@
 package ru.dsoccer1980.ioc;
 
 import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 
 @Profiling
 public class TerminatorQuoter implements Quoter {
@@ -10,9 +11,13 @@ public class TerminatorQuoter implements Quoter {
 
   private String msg;
 
+  @Value("${my.msg}")
+  private String myMsg;
+
   @PostConstruct
   public void init() {
     System.out.println("init(" + repeat + ")");
+    System.out.println(myMsg);
   }
 
   public TerminatorQuoter() {
