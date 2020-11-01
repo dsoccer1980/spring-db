@@ -22,9 +22,6 @@ public class CustomRefreshListener implements ApplicationListener<ContextRefresh
     for (String definitionName : definitionNames) {
       BeanDefinition beanDefinition = factory.getBeanDefinition(definitionName);
       String originalClassName = beanDefinition.getBeanClassName();
-      if (originalClassName == null) {
-        continue;
-      }
       try {
         Class<?> originalClass = Class.forName(originalClassName);
         Method[] methods = originalClass.getMethods();
