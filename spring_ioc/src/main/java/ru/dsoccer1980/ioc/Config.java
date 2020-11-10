@@ -23,4 +23,9 @@ public class Config {
     return terminatorQuoter;
   }
 
+  @Bean
+  public Weapon weapon() {
+    return new WeaponImpl();
+  }
+
 }

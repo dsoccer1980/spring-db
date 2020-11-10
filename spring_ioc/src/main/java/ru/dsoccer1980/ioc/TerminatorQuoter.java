@@ -1,10 +1,14 @@
 package ru.dsoccer1980.ioc;
 
 import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 @Profiling
 public class TerminatorQuoter implements Quoter {
+
+  @Autowired
+  private Weapon weapon;
 
   @InjectRandomInt(min = 1, max = 5)
   private int repeat;
@@ -17,11 +21,14 @@ public class TerminatorQuoter implements Quoter {
   @PostConstruct
   public void init() {
     System.out.println("init(" + repeat + ")");
-    System.out.println(myMsg);
+    System.out.println("@Value in postconstruct " +  myMsg);
+    System.out.println("Autowired in postconstruct  " + weapon);
   }
 
   public TerminatorQuoter() {
     System.out.println("Constructor");
+    System.out.println("@Value in constructor " +  myMsg);
+    System.out.println("Autowired in constructor " + weapon);
   }
 
   @Override

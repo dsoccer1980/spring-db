@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"ru.dsoccer1980.dao"})
+@ComponentScan({"ru.dsoccer1980"})
 public class SpringConfiguration {
     @Bean
     public DataSource dataSource() {
