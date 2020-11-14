@@ -2,6 +2,7 @@ package ru.dsoccer1980;
 
 import java.util.Optional;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.util.Assert;
 import ru.dsoccer1980.config.SpringConfiguration;
 import ru.dsoccer1980.dao.AuthorDao;
 import ru.dsoccer1980.dao.BookDao;
@@ -22,6 +23,7 @@ public class Main {
     PersonDao personDao = applicationContext.getBean(PersonDao.class);
     CompanyDao companyDao = applicationContext.getBean(CompanyDao.class);
 
+
     //companyDao.insertWithPerson(new Company("comp2", new ContactPerson("c2", "l2", "p2")), new Person("pers2"));
 
 //    Author sasha = new Author("Sasha2");
@@ -37,7 +39,7 @@ public class Main {
 
   //  authorDao.getCriteria();
 
-    personDao.getAll().forEach(System.out::println);
+   // personDao.getAll().forEach(System.out::println);
 //    Person person = new Person("person2");
 //    personDao.insert(person);
 
