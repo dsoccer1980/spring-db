@@ -15,6 +15,7 @@
     <module>spring-webmvc</module>
     <module>spring-security</module>
     <module>spring_ioc</module>
+    <module>other</module>
   </modules>
 
 
