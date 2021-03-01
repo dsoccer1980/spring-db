@@ -9,9 +9,12 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
   @Override
   public void greeting(HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
 
-    HelloResponse response = GreetingServiceOuterClass.HelloResponse.newBuilder()
-        .setGreeting("Hello from server").build();
-    responseObserver.onNext(response);
+    for (int i = 0; i < 10; i++) {
+      HelloResponse response = GreetingServiceOuterClass.HelloResponse.newBuilder()
+          .setGreeting("Hello from server " + i + ", " + request.getName()).build();
+      responseObserver.onNext(response);
+    }
+
     responseObserver.onCompleted();
   }
 }

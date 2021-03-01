@@ -2,6 +2,7 @@ package ru.dsoccer1980.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import java.util.Iterator;
 import ru.dsoccer1980.grpc.GreetingServiceGrpc;
 import ru.dsoccer1980.grpc.GreetingServiceGrpc.GreetingServiceBlockingStub;
 import ru.dsoccer1980.grpc.GreetingServiceOuterClass.HelloRequest;
@@ -15,8 +16,10 @@ public class Main {
 
     GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
     HelloRequest request = HelloRequest.newBuilder().setName("Deniss").build();
-    HelloResponse response = stub.greeting(request);
-    System.out.println(response);
+    Iterator<HelloResponse> responseIterator = stub.greeting(request);
+    while (responseIterator.hasNext()) {
+      System.out.println(responseIterator.next());
+    }
 
     channel.shutdownNow();
   }
