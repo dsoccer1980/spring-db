@@ -1,0 +1,27 @@
+syntax = "proto3";
+package ru.dsoccer1980.weather;
+
+message WeatherRequest {
+ Coordinates coordinates = 1;
+}
+
+message WeatherResponse {
+  Wind wind = 1;
+}
+
+message Coordinates {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
+
+message Wind {
+  int32 speed = 1;
+}
+
+service WeatherStreamingService {
+  rpc observer(stream WeatherRequest) returns (stream WeatherResponse);
+}
+
+service WindStreamingService {
+  rpc observe(stream Coordinates) returns (stream Wind);
+}
