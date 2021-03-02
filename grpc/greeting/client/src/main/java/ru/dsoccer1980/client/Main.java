@@ -4,7 +4,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 import ru.dsoccer1980.grpc.GreetingServiceGrpc;
 import ru.dsoccer1980.grpc.GreetingServiceGrpc.GreetingServiceStub;
 import ru.dsoccer1980.grpc.GreetingServiceOuterClass.HelloRequest;
@@ -28,6 +27,7 @@ public class Main {
 
       @Override
       public void onError(Throwable throwable) {
+        System.err.println(throwable.toString());
         semaphore.release();
       }
 
@@ -38,7 +38,7 @@ public class Main {
 
       }
     });
-    TimeUnit.SECONDS.sleep(1);
+
     for (int i = 0; i < 10; i++) {
       HelloRequest request = HelloRequest.newBuilder().setName("Deniss " + i).build();
       greetingStream.onNext(request);

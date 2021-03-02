@@ -19,7 +19,7 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
 
       @Override
       public void onError(Throwable throwable) {
-        System.out.println("Error!!!!!!!!!");
+        System.err.println(throwable.toString());
       }
 
       @Override
