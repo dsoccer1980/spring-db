@@ -40,7 +40,7 @@ public class Main {
     });
 
     for (int i = 0; i < 10; i++) {
-      HelloRequest request = HelloRequest.newBuilder().setName("Deniss " + i).build();
+      HelloRequest request = HelloRequest.newBuilder().setName(i + "").build();
       greetingStream.onNext(request);
     }
 
