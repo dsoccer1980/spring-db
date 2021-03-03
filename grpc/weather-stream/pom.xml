@@ -15,6 +15,7 @@
     <module>weather-server</module>
     <module>wind-service</module>
     <module>weather-client</module>
+    <module>temperature-service</module>
   </modules>
 
 

@@ -18,12 +18,12 @@ public class WindStreamingServiceImpl extends WindStreamingServiceImplBase {
 
       @Override
       public void onError(Throwable throwable) {
-        System.err.println(throwable.toString());
+        responseObserver.onError(throwable);
       }
 
       @Override
       public void onCompleted() {
-        System.out.println("WindStreamingServiceImpl completed");
+        responseObserver.onCompleted();
       }
     };
   }
