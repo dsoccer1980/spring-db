@@ -1,0 +1,47 @@
+syntax = "proto3";
+package ee.dsoccer.bet;
+
+import "google/protobuf/empty.proto";
+
+message Deposit {
+  int32 userId = 1;
+  int32 amount = 2;
+  Currency currency = 3;
+}
+
+message Withdraw {
+  int32 userId = 1;
+  int32 amount = 2;
+  Currency currency = 3;
+}
+
+message User {
+  int32 userId = 1;
+}
+
+message Balance {
+  repeated AmountCurrency amountCurrency = 1;
+}
+
+message AmountCurrency {
+  int32 amount = 1;
+  Currency currency = 2;
+}
+
+enum Currency {
+  EUR = 0;
+  USD = 1;
+  GBP = 2;
+}
+
+service DepositService {
+  rpc deposit(Deposit) returns (google.protobuf.Empty);
+}
+
+service WithdrawService {
+  rpc withdraw(Withdraw) returns (google.protobuf.Empty);
+}
+
+service BalanceService {
+  rpc balance(User) returns(Balance);
+}
