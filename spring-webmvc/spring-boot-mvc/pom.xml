@@ -12,7 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.sourc>1.8</maven.compiler.sourc>
+    <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 
   <artifactId>spring-boot-mvc</artifactId>
