@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>bet-server</module>
+    <module>bet-client</module>
   </modules>
 
 

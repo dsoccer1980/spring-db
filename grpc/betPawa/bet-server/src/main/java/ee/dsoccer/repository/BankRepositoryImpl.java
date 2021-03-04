@@ -13,22 +13,24 @@ public class BankRepositoryImpl implements BankRepository {
   @Override
   public void deposit(Deposit deposit) throws BankException {
     //TODO
+    System.out.println("Deposit " + deposit);
   }
 
   @Override
   public void withdraw(Withdraw withdraw) throws BankException {
      //TODO
+    System.out.println("Withdraw " + withdraw);
   }
 
   @Override
   public Balance getBalance(User user) {  //TODO
     AmountCurrency eur = AmountCurrency.newBuilder().setCurrency(Currency.EUR).setAmount(100).build();
     AmountCurrency usd = AmountCurrency.newBuilder().setCurrency(Currency.USD).setAmount(200).build();
-    AmountCurrency gbp = AmountCurrency.newBuilder().setCurrency(Currency.GBP).setAmount(0).build();
+    AmountCurrency gbp = AmountCurrency.newBuilder().setCurrency(Currency.GBP).setAmount(300).build();
     return Balance.newBuilder()
-        .setAmountCurrency(0, eur)
-        .setAmountCurrency(1, usd)
-        .setAmountCurrency(2, gbp)
+        .addAmountCurrency(usd)
+        .addAmountCurrency(eur)
+        .addAmountCurrency(gbp)
         .build();
   }
 }
