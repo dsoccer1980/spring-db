@@ -1,16 +1,21 @@
 package ee.dsoccer.repository;
 
-import ee.dsoccer.bet.Bet.Balance;
-import ee.dsoccer.bet.Bet.Deposit;
-import ee.dsoccer.bet.Bet.User;
-import ee.dsoccer.bet.Bet.Withdraw;
-import ee.dsoccer.exception.BankException;
+import ee.dsoccer.bet.Bet.Currency;
+import ee.dsoccer.model.Account;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BankRepository {
+public interface BankRepository extends JpaRepository<Account, Long> {
 
-  void deposit(Deposit deposit) throws BankException;
+  Optional<Account> findByUserIdAndCurrency(int userId, Currency currency);
 
-  void withdraw(Withdraw withdraw) throws BankException;
+  List<Account> findByUserId(int userId);
 
-  Balance getBalance(User user);
+//
+//  void deposit(Deposit deposit) throws BankException;
+//
+//  void withdraw(Withdraw withdraw) throws BankException;
+//
+//  Balance getBalance(User user);
 }
