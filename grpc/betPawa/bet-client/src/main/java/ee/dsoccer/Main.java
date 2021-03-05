@@ -16,6 +16,7 @@ import ee.dsoccer.service.WithdrawService;
 import io.grpc.ManagedChannel;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -29,12 +30,16 @@ public class Main {
 
     Semaphore semaphore = new Semaphore(0);
 
-    Deposit deposit = Deposit.newBuilder().setUserId(1).setAmount(200).setCurrency(Currency.EUR).build();
+    Deposit deposit = Deposit.newBuilder().setUserId(3).setAmount(100).setCurrency(Currency.GBP).build();
     new DepositService().deposit(deposit, depositStub);
 
-    Withdraw withdraw = Withdraw.newBuilder().setUserId(1).setAmount(50).setCurrency(Currency.EUR).build();
+    TimeUnit.SECONDS.sleep(2);
+
+    Withdraw withdraw = Withdraw.newBuilder().setUserId(3).setAmount(40).setCurrency(Currency.GBP).build();
     new WithdrawService().withdraw(withdraw, withdrawStub);
-    User user = User.newBuilder().setUserId(1).build();
+
+    TimeUnit.SECONDS.sleep(1);
+    User user = User.newBuilder().setUserId(3).build();
     new BalanceService().balance(user, balanceStub);
 
     semaphore.acquire();

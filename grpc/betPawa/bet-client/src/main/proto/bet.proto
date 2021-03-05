@@ -29,9 +29,10 @@ message AmountCurrency {
 }
 
 enum Currency {
-  USD = 0;
+  UNKNOWN = 0;
   EUR = 1;
-  GBP = 2;
+  USD = 2;
+  GBP = 3;
 }
 
 service DepositService {

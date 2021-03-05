@@ -16,6 +16,7 @@ public class WithdrawService {
 
       @Override
       public void onError(Throwable throwable) {
+        System.err.println(throwable.toString());
         System.err.println(Arrays.toString(throwable.getStackTrace()));
       }
 
