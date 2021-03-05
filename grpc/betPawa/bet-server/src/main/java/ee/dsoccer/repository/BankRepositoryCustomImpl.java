@@ -34,7 +34,7 @@ public class BankRepositoryCustomImpl implements BankRepositoryCustom {
   public void withdraw(Withdraw withdraw) throws BankException {
     verifyCurrency(withdraw.getCurrency().name());
     Account account = repository.findByUserIdAndCurrency(withdraw.getUserId(), withdraw.getCurrency())
-        .orElseThrow(() -> new BankException("Unknown currency"));
+        .orElse(new Account(withdraw.getUserId(), 0, withdraw.getCurrency()));
     if (account.getAmount() < withdraw.getAmount()) {
       throw new BankException("insufficient funds");
     }

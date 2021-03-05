@@ -31,16 +31,16 @@ public class Main {
     Semaphore semaphore = new Semaphore(0);
 
     Deposit deposit = Deposit.newBuilder().setUserId(3).setAmount(100).setCurrency(Currency.GBP).build();
-    new DepositService().deposit(deposit, depositStub);
+    //new DepositService().deposit(deposit, depositStub);
 
     TimeUnit.SECONDS.sleep(2);
 
-    Withdraw withdraw = Withdraw.newBuilder().setUserId(3).setAmount(40).setCurrency(Currency.GBP).build();
+    Withdraw withdraw = Withdraw.newBuilder().setUserId(3).setAmount(70).setCurrency(Currency.GBP).build();
     new WithdrawService().withdraw(withdraw, withdrawStub);
 
     TimeUnit.SECONDS.sleep(1);
     User user = User.newBuilder().setUserId(3).build();
-    new BalanceService().balance(user, balanceStub);
+  //  new BalanceService().balance(user, balanceStub);
 
     semaphore.acquire();
   }
