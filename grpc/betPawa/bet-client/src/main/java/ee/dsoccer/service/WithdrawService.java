@@ -3,8 +3,8 @@ package ee.dsoccer.service;
 import com.google.protobuf.Empty;
 import ee.dsoccer.bet.Bet.Withdraw;
 import ee.dsoccer.bet.WithdrawServiceGrpc.WithdrawServiceStub;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
-import java.util.Arrays;
 
 public class WithdrawService {
 
@@ -16,8 +16,7 @@ public class WithdrawService {
 
       @Override
       public void onError(Throwable throwable) {
-        System.err.println(throwable.toString());
-        System.err.println(Arrays.toString(throwable.getStackTrace()));
+        System.err.println(Status.fromThrowable(throwable).getDescription());
       }
 
       @Override

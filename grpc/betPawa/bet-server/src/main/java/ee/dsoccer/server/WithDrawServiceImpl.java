@@ -5,6 +5,8 @@ import ee.dsoccer.bet.Bet.Withdraw;
 import ee.dsoccer.bet.WithdrawServiceGrpc.WithdrawServiceImplBase;
 import ee.dsoccer.exception.BankException;
 import ee.dsoccer.repository.BankRepository;
+import io.grpc.Status;
+import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +29,7 @@ public class WithDrawServiceImpl extends WithdrawServiceImplBase {
       responseObserver.onCompleted();
     } catch (BankException e) {
       System.err.println(e.getMessage());
-      responseObserver.onError(e);
+      responseObserver.onError(new StatusException(Status.NOT_FOUND.withDescription(e.getMessage())));
     }
   }
 
