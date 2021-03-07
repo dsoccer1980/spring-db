@@ -17,6 +17,7 @@
     <module>spring_ioc</module>
     <module>other</module>
     <module>grpc</module>
+    <module>graphql</module>
   </modules>
 
 
