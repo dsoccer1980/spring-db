@@ -7,7 +7,6 @@ import ee.dsoccer.exception.BankException;
 import ee.dsoccer.repository.BankRepository;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DepositServiceImpl extends DepositServiceImplBase {
@@ -19,7 +18,6 @@ public class DepositServiceImpl extends DepositServiceImplBase {
   }
 
   @Override
-  @Transactional
   public void deposit(Deposit deposit, StreamObserver<Empty> responseObserver) {
     try {
       repository.deposit(deposit);

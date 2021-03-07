@@ -18,13 +18,11 @@ public class BalanceServiceImpl extends BalanceServiceImplBase {
   }
 
   @Override
-  @Transactional
   public void balance(User user, StreamObserver<Balance> responseObserver) {
     try {
       Balance balance = repository.getBalance(user);
       responseObserver.onNext(balance);
       responseObserver.onCompleted();
-
     } catch (Exception e) {
       responseObserver.onError(e);
     }

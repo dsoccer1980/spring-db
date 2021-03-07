@@ -9,7 +9,6 @@ import io.grpc.Status;
 import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class WithDrawServiceImpl extends WithdrawServiceImplBase {
@@ -21,7 +20,6 @@ public class WithDrawServiceImpl extends WithdrawServiceImplBase {
   }
 
   @Override
-  @Transactional
   public void withdraw(Withdraw withdraw, StreamObserver<Empty> responseObserver) {
     try {
       repository.withdraw(withdraw);

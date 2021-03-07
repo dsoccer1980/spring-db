@@ -35,12 +35,14 @@ public class ClientCreating {
     executorService = Executors.newFixedThreadPool(THREAD_COUNT);
   }
 
-  public void run() throws InterruptedException {
+  public void run(int usersNumber, int concurrentNumber, int roundPerThread) throws InterruptedException {
     Semaphore semaphore = new Semaphore(0);
 
     List<CompletableFuture> futures = new ArrayList<>();
-    for (int i = 0; i < 800; i++) {
-      futures.add(CompletableFuture.runAsync(new ClientThread(i), executorService));
+    for (int userId = 0; userId < usersNumber; userId++) {
+      for (int concurrent = 0; concurrent < concurrentNumber; concurrent++) {
+        futures.add(CompletableFuture.runAsync(new ClientThread(userId, roundPerThread), executorService));
+      }
     }
 
     CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
@@ -66,15 +68,19 @@ public class ClientCreating {
   class ClientThread implements Runnable {
 
     private int userId;
+    private int roundPerThread;
 
-    ClientThread(int userId) {
+    ClientThread(int userId, int roundPerThread) {
       this.userId = userId;
+      this.roundPerThread = roundPerThread;
     }
 
     @Override
     public void run() {
-      int roundNumber = ThreadLocalRandom.current().nextInt(3);
-      rounds.get(roundNumber).accept(userId);
+      for (int i = 0; i < roundPerThread; i++) {
+        int roundNumber = ThreadLocalRandom.current().nextInt(3);
+        rounds.get(roundNumber).accept(userId);
+      }
     }
   }
 
