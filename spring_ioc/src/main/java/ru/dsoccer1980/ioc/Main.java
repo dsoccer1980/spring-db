@@ -13,6 +13,14 @@ public class Main {
 //    System.out.println(Arrays.toString(context.getBeanDefinitionNames()));
     Quoter quoter = context.getBean(Quoter.class);
     quoter.sayQoute();
+
+//    SingletonBean singletonBean = context.getBean(SingletonBean.class);
+//    singletonBean.getPrototypeBean();
+//    singletonBean.getPrototypeBean();
+//    SingletonBean singletonBean2 = context.getBean(SingletonBean.class);
+//    singletonBean2.getPrototypeBean();
+//    singletonBean2.getPrototypeBean();
+
   }
 
 
