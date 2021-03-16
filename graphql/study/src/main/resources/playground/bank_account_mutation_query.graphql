@@ -1,0 +1,8 @@
+mutation CREATE_BANK_ACCOUNT {
+    createBankAccount(input: {
+        firstName: "Ljudmila"
+    }) {
+        id
+        currency
+    }
+}

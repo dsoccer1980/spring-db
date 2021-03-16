@@ -5,6 +5,10 @@ query GET_BANK_ACCOUNT($id:ID) {
             id
             firstName
             lastName
+            middleNames
+        }
+        assets {
+            id
         }
     }
 }

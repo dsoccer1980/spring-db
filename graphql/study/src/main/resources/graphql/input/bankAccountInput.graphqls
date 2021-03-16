@@ -1,0 +1,3 @@
+input BankAccountInput {
+    firstName: String!
+}
