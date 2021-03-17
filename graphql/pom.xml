@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>study</module>
+    <module>study2</module>
   </modules>
 
 
