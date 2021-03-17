@@ -10,4 +10,7 @@ graphql:
         variables: classpath:playground/bank_account_variables.json
       - name: Bank account mutation query
         query: classpath:playground/bank_account_mutation_query.graphql
-#    enabled: false
+spring:
+  servlet:
+    multipart:
+      max-file-size: 3MB

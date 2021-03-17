@@ -1,3 +1,4 @@
 input BankAccountInput {
     firstName: String!
+    age: NonNegativeInt!
 }
