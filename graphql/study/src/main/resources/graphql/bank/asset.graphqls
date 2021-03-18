@@ -1,3 +1,4 @@
 type Asset {
   id: ID!
+  type: String!
 }

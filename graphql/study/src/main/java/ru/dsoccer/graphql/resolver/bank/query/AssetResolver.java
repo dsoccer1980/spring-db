@@ -3,7 +3,6 @@ package ru.dsoccer.graphql.resolver.bank.query;
 import graphql.kickstart.tools.GraphQLResolver;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,7 +20,7 @@ public class AssetResolver implements GraphQLResolver<BankAccount> {
   public CompletableFuture<List<Asset>> assets(BankAccount bankAccount) {
     return CompletableFuture.supplyAsync(() -> {
       log.info("Request asset for bankAccount {} ", bankAccount.getId());
-      return Arrays.asList(new Asset(UUID.randomUUID()), new Asset(UUID.randomUUID()));
+      return Arrays.asList(new Asset("debit"), new Asset("credit"));
     }, executorService);
   }
 

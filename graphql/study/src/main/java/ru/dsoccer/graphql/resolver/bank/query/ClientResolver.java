@@ -1,6 +1,8 @@
 package ru.dsoccer.graphql.resolver.bank.query;
 
 import graphql.kickstart.tools.GraphQLResolver;
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,13 +28,15 @@ public class ClientResolver implements GraphQLResolver<BankAccount> {
     return CompletableFuture.supplyAsync(() -> {
       log.info("Request client for bankAccount {} ", bankAccount.getId());
 
-//
-//      Client clientA = Client.builder().id(UUID.randomUUID()).firstName("Deniss").lastName("Love").middleNames(Arrays.asList("Leonid", "Gennady"))
-//          .build();
+
+      Client clientA = Client.builder().id(UUID.randomUUID()).firstName("Deniss").lastName("Love").middleNames(Arrays.asList("Leonid", "Gennady"))
+          .build();
 //      Client clientB = Client.builder().id(UUID.randomUUID()).firstName("Sasha").lastName("Love2").build();
 //      clientA.setClient(clientB);
 //      clientB.setClient(clientA);
-      return bankAccount.getClient();
+      Client client = bankAccount.getClient();
+      client.setClient(clientA);
+      return client;
     }, executorService);
   }
 

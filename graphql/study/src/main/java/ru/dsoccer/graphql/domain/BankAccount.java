@@ -11,8 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,11 +33,11 @@ public class BankAccount {
   )
   UUID id;
   @OneToOne
-  @JoinColumn(name = "bank_account_id_key", referencedColumnName = "id")
+  @JoinColumn(name = "client_id_key", referencedColumnName = "id")
   Client client;
   @Enumerated(EnumType.STRING)
   Currency currency;
-  @Transient
+  @OneToMany(mappedBy = "bankAccount")
   List<Asset> assets;
   LocalDate createdOn;
   ZonedDateTime createdAt;

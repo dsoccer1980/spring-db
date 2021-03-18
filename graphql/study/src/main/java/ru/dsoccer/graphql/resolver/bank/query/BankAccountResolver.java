@@ -22,7 +22,7 @@ public class BankAccountResolver implements GraphQLQueryResolver {
     return BankAccount.builder().id(id).currency(Currency.USD).build();
   }
 
-  public BankAccount bankAccount(String firstName) {
+  public BankAccount bankAccountByName(String firstName) {
     log.info("Retrieving bank account for: {}", firstName);
     return bankAccountService.get(firstName);
   }

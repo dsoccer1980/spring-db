@@ -11,7 +11,7 @@ query GET_BANK_ACCOUNT($id:ID) {
 }
 
 query GET_BANK_ACCOUNT_By_FirstName {
-    bankAccount(firstName: "Deniss") {
+    bankAccountByName(firstName: "Deniss") {
         id
         client {
             id
