@@ -3,6 +3,7 @@ package ru.dsoccer.graphql.domain;
 
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Client {
 
   @Id
+  @Column(length = 16)
   @GeneratedValue(generator = "UUID")
   @GenericGenerator(
       name = "UUID",
@@ -37,5 +39,15 @@ public class Client {
   BankAccount bankAccount;
 
   public Client() {
+  }
+
+  @Override
+  public String toString() {
+    return "Client{" +
+        "id=" + id +
+        ", firstName='" + firstName + '\'' +
+        ", middleNames=" + middleNames +
+        ", lastName='" + lastName + '\'' +
+        '}';
   }
 }

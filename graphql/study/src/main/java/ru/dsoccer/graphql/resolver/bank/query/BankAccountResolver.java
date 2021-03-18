@@ -1,6 +1,7 @@
 package ru.dsoccer.graphql.resolver.bank.query;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,11 @@ public class BankAccountResolver implements GraphQLQueryResolver {
   public BankAccount bankAccount(String firstName) {
     log.info("Retrieving bank account for: {}", firstName);
     return bankAccountService.get(firstName);
+  }
+
+  public List<BankAccount> bankAccounts() {
+    log.info("Retrieving all bank accounts");
+    return bankAccountService.findAll();
   }
 
 }

@@ -1,5 +1,6 @@
 package ru.dsoccer.graphql.service;
 
+import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,10 @@ public class BankAccountService {
     Client client = clientRepository.findByFirstName(firstName).orElseThrow(() -> new EntityNotFoundException("firstName not found"));
     System.out.println("---------" + client);
     return bankAccountRepository.findByClient(client).orElseThrow(() -> new EntityNotFoundException("Account not found"));
+  }
+
+  @Transactional(readOnly = true)
+  public List<BankAccount> findAll() {
+    return bankAccountRepository.findAll();
   }
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,7 +16,6 @@ import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 @Builder
@@ -25,6 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class BankAccount {
 
   @Id
+  @Column(length = 16)
   @GeneratedValue(generator = "UUID")
   @GenericGenerator(
       name = "UUID",
