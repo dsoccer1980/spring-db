@@ -1,6 +1,7 @@
 mutation CREATE_BANK_ACCOUNT {
     createBankAccount(input: {
-        firstName: "Ljudmila"
+        firstName: "Ljudmila",
+        lastName: "Voroshnina"
     }) {
         id
         currency

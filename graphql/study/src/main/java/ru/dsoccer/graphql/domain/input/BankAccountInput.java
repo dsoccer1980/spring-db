@@ -8,5 +8,6 @@ public class BankAccountInput {
 
   @NotBlank
   String firstName;
-  int age;
+  @NotBlank
+  String lastName;
 }

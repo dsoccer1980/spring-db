@@ -1,3 +1,4 @@
 type Query {
   bankAccount(id:ID): BankAccount
+  bankAccount(firstName:String): BankAccount
 }

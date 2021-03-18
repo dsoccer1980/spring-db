@@ -13,23 +13,29 @@ import org.springframework.validation.annotation.Validated;
 import ru.dsoccer.graphql.domain.BankAccount;
 import ru.dsoccer.graphql.domain.Currency;
 import ru.dsoccer.graphql.domain.input.BankAccountInput;
+import ru.dsoccer.graphql.service.BankAccountService;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 @Validated
-public class BankAccountMutation  implements GraphQLMutationResolver {
+public class BankAccountMutation implements GraphQLMutationResolver {
 
+
+  private final BankAccountService bankAccountService;
   private final Clock clock;
 
   public BankAccount createBankAccount(@Valid BankAccountInput input) {
     log.info("create bankAccount for input {}", input);
-    return BankAccount.builder()
+
+    BankAccount bankAccount = BankAccount.builder()
         .id(UUID.randomUUID())
         .currency(Currency.EUR)
         .createdOn(LocalDate.now(clock))
         .createdAt(ZonedDateTime.now(clock))
         .build();
+    bankAccountService.save(input.getFirstName(), input.getLastName(), bankAccount);
+    return bankAccount;
   }
 
 }

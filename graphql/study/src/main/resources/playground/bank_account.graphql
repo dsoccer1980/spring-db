@@ -7,8 +7,16 @@ query GET_BANK_ACCOUNT($id:ID) {
             lastName
             middleNames
         }
-        assets {
+    }
+}
+
+query GET_BANK_ACCOUNT_By_FirstName {
+    bankAccount(firstName: "Deniss") {
+        id
+        client {
             id
+            firstName
+            lastName
         }
     }
 }
