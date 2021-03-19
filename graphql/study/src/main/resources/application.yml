@@ -26,7 +26,7 @@ spring:
             non_contextual_creation: true
 #    generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   servlet:
     multipart:
       max-file-size: 3MB

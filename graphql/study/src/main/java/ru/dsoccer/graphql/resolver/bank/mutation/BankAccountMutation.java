@@ -4,7 +4,6 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +28,6 @@ public class BankAccountMutation implements GraphQLMutationResolver {
     log.info("create bankAccount for input {}", input);
 
     BankAccount bankAccount = BankAccount.builder()
-        .id(UUID.randomUUID())
         .currency(Currency.EUR)
         .createdOn(LocalDate.now(clock))
         .createdAt(ZonedDateTime.now(clock))

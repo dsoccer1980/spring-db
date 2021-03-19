@@ -2,7 +2,6 @@ package ru.dsoccer.graphql.resolver.bank.query;
 
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,7 @@ public class BankAccountResolver implements GraphQLQueryResolver {
 
   private final BankAccountService bankAccountService;
 
-  public BankAccount bankAccount(UUID id) {
+  public BankAccount bankAccount(Integer id) {
     log.info("Retrieving bank account: {}", id);
     return BankAccount.builder().id(id).currency(Currency.USD).build();
   }

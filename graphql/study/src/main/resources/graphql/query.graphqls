@@ -1,5 +1,5 @@
 type Query {
-  bankAccount(id:ID): BankAccount
+  bankAccount(id:Int): BankAccount
   bankAccountByName(firstName:String): BankAccount
   bankAccounts: [BankAccount]
 }
