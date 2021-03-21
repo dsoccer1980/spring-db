@@ -1,5 +1,5 @@
 type BankAccount {
-  id: Int!
+  id: ID!
   client: Client
   currency: Currency!
   assets: [Asset!]

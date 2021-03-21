@@ -1,6 +1,7 @@
 package ru.dsoccer.graphql.resolver.bank.query;
 
 import graphql.kickstart.tools.GraphQLResolver;
+import graphql.schema.DataFetchingEnvironment;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +22,7 @@ public class ClientResolver implements GraphQLResolver<BankAccount> {
   private final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
   private final BankAccountService bankAccountService;
 
-  public CompletableFuture<Client> client(BankAccount bankAccount) {
+  public CompletableFuture<Client> client(BankAccount bankAccount, DataFetchingEnvironment environment) {
 
     return CompletableFuture.supplyAsync(() -> {
       log.info("Request client for bankAccount {} ", bankAccount.getId());
