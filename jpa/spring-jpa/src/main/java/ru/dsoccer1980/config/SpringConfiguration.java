@@ -61,6 +61,7 @@ public class SpringConfiguration {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.query.in_clause_parameter_padding", "true");
         return properties;
     }
 

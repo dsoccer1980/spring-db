@@ -35,8 +35,10 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     @Transactional
-    public void insert(String name) {
-        em.persist(new Author(name));
+    public Author insert(String name) {
+        Author author = new Author(name);
+        em.persist(author);
+        return author;
     }
 
     @Override
