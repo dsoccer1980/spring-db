@@ -5,4 +5,13 @@ query GET_ALL_CARS {
      }
 }
 
+mutation SAVE_CAR {
+    saveCar(car: {
+        id: 10,
+        name: "Ferrary"
+    }) {
+        id
+        name
+    }
+}
 

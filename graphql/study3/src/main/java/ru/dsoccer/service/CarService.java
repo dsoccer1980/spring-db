@@ -1,5 +1,7 @@
 package ru.dsoccer.service;
 
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import java.util.List;
@@ -15,9 +17,14 @@ public class CarService {
 
   private final CarRepository carRepository;
 
-  @GraphQLQuery(name="getCars")
+  @GraphQLQuery(name = "getCars")
   public List<Car> findAll() {
     return carRepository.findAll();
+  }
+
+  @GraphQLMutation(name = "saveCar")
+  public Car save(@GraphQLArgument(name = "car") Car car) {
+    return carRepository.save(car);
   }
 
 }
