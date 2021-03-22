@@ -1,0 +1,28 @@
+graphql:
+  servlet:
+    max-query-depth: 5
+  playground:
+    tabs:
+      - name: Car query
+        query: classpath:playground/car_query.graphql
+  spqr:
+    gui:
+      enabled: true
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/graphql
+    username: root
+    password: root
+    initialization-mode: always
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+#    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 3MB

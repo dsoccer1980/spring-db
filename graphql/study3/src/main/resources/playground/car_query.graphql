@@ -1,0 +1,8 @@
+query GET_ALL_CARS {
+     getCars {
+         id
+         name
+     }
+}
+
+
