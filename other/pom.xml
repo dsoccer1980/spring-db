@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>jmh</module>
+    <module>rabbitmq</module>
   </modules>
 
 
