@@ -14,12 +14,24 @@ public class Tut1Sender {
   @Value("${queue.name}")
   private String queueName;
 
-  private AtomicInteger counter = new AtomicInteger();
+  private AtomicInteger counter = new AtomicInteger(1);
+  private AtomicInteger msgIndex = new AtomicInteger(1);
 
   @Scheduled(fixedDelay = 1000, initialDelay = 500)
   public void send() {
-    String message = "Hello World! " + counter.getAndIncrement();
+    String message = getMsgToSend();
+    changeCounter();
     this.template.convertAndSend(queueName, message);
     System.out.println(" [x] Sent '" + message + "'");
+  }
+
+  private String getMsgToSend() {
+    return "Msg:" + msgIndex.getAndIncrement() + ". Wait " + counter.getAndIncrement();
+  }
+
+  private void changeCounter() {
+    if (counter.get() > 5) {
+      counter.set(1);
+    }
   }
 }
