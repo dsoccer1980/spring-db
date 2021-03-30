@@ -1,0 +1,1 @@
+java -jar target/rabbit-sender.jar --rabbitmq.keys=quick.orange.rabbit,lazy.orange.elephant,quick.orange.fox,lazy.brown.fox,lazy.pink.rabbit,quick.brown.fox
