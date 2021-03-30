@@ -1,0 +1,1 @@
+java -jar target/rabbit-receiver.jar --rabbitmq.keys=black,orange
