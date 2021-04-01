@@ -7,6 +7,7 @@ import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import org.hibernate.annotations.QueryHints;
 import org.springframework.stereotype.Repository;
@@ -100,6 +101,23 @@ public class CompanyDaoImpl implements CompanyDao {
         .setHint(QueryHints.FETCHGRAPH, graph);
     List<Company> resultList = query.getResultList();
     resultList.forEach(c -> c.getPersons().size());
+    return resultList;
+  }
+
+  @Override
+  @Transactional
+  public List<Company> getCompaniesWithPersonMax(int count) {
+    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c JOIN FETCH c.persons", Company.class);
+    query.setMaxResults(count);
+    return query.getResultList();
+  }
+
+  @Override
+  public List<Tuple> getAllNames() {
+    TypedQuery<Tuple> query = entityManager.createQuery("Select c.name as name, c.contactPerson as contactPerson From Company c ", Tuple.class);
+    List<Tuple> resultList = query.getResultList();
+//    resultList.forEach(company -> System.out.println(company.get("name") + " " + company.get("contactPerson")));
+    resultList.forEach(company -> System.out.println(company.get(Company_.name.getName()) + " " + company.get("contactPerson")));
     return resultList;
   }
 

@@ -2,6 +2,7 @@ package ru.dsoccer1980.dao;
 
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.Tuple;
 import ru.dsoccer1980.domain.Company;
 import ru.dsoccer1980.domain.Person;
 import ru.dsoccer1980.dto.CompanyPhoneDto;
@@ -27,4 +28,8 @@ public interface CompanyDao {
   List<Company> getAllWithGraph();
 
   List<Company> getAllWithGraphUsingMetaModel();
+
+  List<Company> getCompaniesWithPersonMax(int count);
+
+  List<Tuple> getAllNames();
 }
