@@ -25,4 +25,6 @@ public interface CompanyDao {
   List<Company> getAllWithNamedGraph();
 
   List<Company> getAllWithGraph();
+
+  List<Company> getAllWithGraphUsingMetaModel();
 }

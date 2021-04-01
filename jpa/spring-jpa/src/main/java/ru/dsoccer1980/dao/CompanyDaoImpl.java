@@ -12,6 +12,7 @@ import org.hibernate.annotations.QueryHints;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.domain.Company;
+import ru.dsoccer1980.domain.Company_;
 import ru.dsoccer1980.domain.Person;
 import ru.dsoccer1980.dto.CompanyPhoneDto;
 
@@ -84,6 +85,17 @@ public class CompanyDaoImpl implements CompanyDao {
   public List<Company> getAllWithGraph() {
     EntityGraph<Company> graph = entityManager.createEntityGraph(Company.class);
     graph.addAttributeNodes("persons");
+    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
+        .setHint(QueryHints.FETCHGRAPH, graph);
+    List<Company> resultList = query.getResultList();
+    resultList.forEach(c -> c.getPersons().size());
+    return resultList;
+  }
+
+  @Override
+  public List<Company> getAllWithGraphUsingMetaModel() {
+    EntityGraph<Company> graph = entityManager.createEntityGraph(Company.class);
+    graph.addAttributeNodes(Company_.persons);
     TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
         .setHint(QueryHints.FETCHGRAPH, graph);
     List<Company> resultList = query.getResultList();
