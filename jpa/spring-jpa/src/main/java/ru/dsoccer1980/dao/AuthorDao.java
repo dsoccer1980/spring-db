@@ -21,4 +21,6 @@ public interface AuthorDao {
     void deleteAll();
 
     void getCriteria();
+
+    void bulkInsert(List<Author> list);
 }

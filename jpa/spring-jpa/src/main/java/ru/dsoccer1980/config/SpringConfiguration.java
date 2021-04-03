@@ -62,6 +62,10 @@ public class SpringConfiguration {
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.query.in_clause_parameter_padding", "true");
+//        properties.setProperty("hibernate.format_sql", "true");
+//        properties.setProperty("hibernate.use_sql_comments", "true");
+        properties.setProperty("hibernate.jdbc.batch_size", "5");
+        properties.setProperty("hibernate.generate_statistics", "true");
         return properties;
     }
 

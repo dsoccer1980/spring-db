@@ -96,5 +96,11 @@ public class AuthorDaoImpl implements AuthorDao {
 
     }
 
+    @Override
+    @Transactional
+    public void bulkInsert(List<Author> list) {
+        list.forEach(author -> em.persist(author));
+    }
+
 
 }

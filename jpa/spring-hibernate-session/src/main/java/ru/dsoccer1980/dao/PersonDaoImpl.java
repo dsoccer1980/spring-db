@@ -180,5 +180,11 @@ public class PersonDaoImpl implements PersonDao {
     return list;
   }
 
+  @Override
+  @Transactional
+  public void bulkInsert(List<Person> list) {
+    list.forEach(person -> session.persist(person));
+  }
+
 
 }

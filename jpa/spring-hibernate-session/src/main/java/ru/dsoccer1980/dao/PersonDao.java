@@ -44,4 +44,6 @@ public interface PersonDao {
   String doReturnWorkNativeSql(long id);
 
   List<Company> getCompaniesWithPersons();
+
+  void bulkInsert(List<Person> list);
 }

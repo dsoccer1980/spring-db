@@ -51,6 +51,8 @@ public class SpringConfiguration {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.jdbc.batch_size", "5");
+        properties.setProperty("hibernate.generate_statistics", "true");
         return properties;
     }
 
