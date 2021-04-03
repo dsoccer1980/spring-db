@@ -183,6 +183,7 @@ public class PersonDaoImpl implements PersonDao {
   @Override
   @Transactional
   public void bulkInsert(List<Person> list) {
+//    session.setJdbcBatchSize(5);
     list.forEach(person -> session.persist(person));
   }
 
