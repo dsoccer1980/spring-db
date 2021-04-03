@@ -42,4 +42,6 @@ public interface PersonDao {
   void doWorkNativeSql();
 
   String doReturnWorkNativeSql(long id);
+
+  List<Company> getCompaniesWithPersons();
 }

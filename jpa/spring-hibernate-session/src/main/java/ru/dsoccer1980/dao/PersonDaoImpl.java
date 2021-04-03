@@ -133,14 +133,14 @@ public class PersonDaoImpl implements PersonDao {
   @Transactional
   public void testQuery(Long id1, Long id2) {
     Person person = new Person("person");
-    session.persist(person);;
+    session.persist(person);
   }
 
   @Override
   public String doNativeQuery(long id) {
     NativeQuery nativeQuery = session.createNativeQuery("SELECT person_name FROM Person Where id=?");
     nativeQuery.setParameter(1, id);
-    return  (String)nativeQuery.getSingleResult();
+    return (String) nativeQuery.getSingleResult();
   }
 
   @Override
@@ -170,4 +170,15 @@ public class PersonDaoImpl implements PersonDao {
       }
     });
   }
+
+  @Override
+  public List<Company> getCompaniesWithPersons() {
+    TypedQuery<Company> query = session.createQuery("Select DISTINCT  c from Company c JOIN FETCH c.persons", Company.class);
+    query.setHint(QueryHints.PASS_DISTINCT_THROUGH, false);  //remove DISTINCT  from SQL query
+    List<Company> list = query.getResultList();
+    list.forEach(company -> System.out.println(company + " " + company.getPersons()));
+    return list;
+  }
+
+
 }
