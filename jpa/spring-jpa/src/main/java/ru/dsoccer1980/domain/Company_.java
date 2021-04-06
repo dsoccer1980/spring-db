@@ -9,4 +9,6 @@ public abstract class Company_ {
 
   public static volatile ListAttribute<Company, Person> persons;
   public static volatile SingularAttribute<Company, String> name;
+  public static volatile SingularAttribute<Company, Long> id;
+  public static volatile SingularAttribute<Company, ContactPerson> contactPerson;
 }

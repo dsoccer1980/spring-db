@@ -18,6 +18,7 @@
     <module>other</module>
     <module>grpc</module>
     <module>graphql</module>
+    <module>jooq</module>
   </modules>
 
 
