@@ -9,7 +9,8 @@ public class Main {
   public static void main(String[] args) {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
     CompanyDao companyDao = context.getBean(CompanyDao.class);
-    System.out.println(companyDao.getAll());
+    companyDao.getCompaniesWithPersonsUsingJOOQ();
+    companyDao.getCompaniesWithPersonsUsingJOOQ2();
   }
 
 }

@@ -1,98 +1,59 @@
 package ru.dsoccer.jooq.dao;
 
-import java.util.Collections;
+import static ru.dsoccer.jooq.entities.Tables.PERSON;
+import static ru.dsoccer.jooq.entities.tables.Company.COMPANY;
+
 import java.util.List;
-import java.util.Optional;
-import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.Tuple;
-import javax.persistence.TypedQuery;
-import org.hibernate.annotations.QueryHints;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.SelectJoinStep;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.dsoccer.jooq.domain.Company;
-import ru.dsoccer.jooq.domain.Person;
 
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao {
 
   @PersistenceContext
-  private EntityManager entityManager;
+  private EntityManager em;
+
+  @Autowired
+  private DSLContext ctx;
+
+  private ru.dsoccer.jooq.entities.tables.Company c = COMPANY.as("c");
+  private ru.dsoccer.jooq.entities.tables.Person p = PERSON.as("p");
 
   @Override
-  @Transactional
-  public void insert(Company company) {
-    entityManager.persist(company);
-
+  public List<ru.dsoccer.jooq.domain.Company> getCompaniesWithPersonsUsingJOOQ() {
+    List<ru.dsoccer.jooq.domain.Company> list = ctx.select()
+        .from(c)
+        .leftJoin(p).on(c.ID.eq(p.COMPANY_ID))
+        .fetch().into(ru.dsoccer.jooq.domain.Company.class);
+    list.forEach(company -> System.out.println(company + " " + company.getPersons()));
+    return list;
   }
 
   @Override
-  @Transactional
-  public void insertWithPerson(Company company, Person person) {
-    // EntityTransaction transaction = entityManager.getTransaction();
-    // transaction.begin();
-    // entityManager.persist(company);
-    company.setPersons(Collections.singletonList(person));
-    entityManager.persist(company);
-    // transaction.commit();
+  public List<ru.dsoccer.jooq.domain.Company> getCompaniesWithPersonsUsingJOOQ2() {
+    SelectJoinStep<Record> jooqQuery = ctx.select()
+        .from(c)
+        .leftJoin(p).on(c.ID.eq(p.COMPANY_ID));
+
+    Query query = em.createNativeQuery(jooqQuery.getSQL(), ru.dsoccer.jooq.domain.Company.class);
+    setBindParameterValues(query, jooqQuery);
+    List<ru.dsoccer.jooq.domain.Company> list = query.getResultList();
+    list.forEach(System.out::println);
+    return list;
   }
 
-  @Override
-  public Optional<Company> getById(long id) {
-    return Optional.ofNullable(entityManager.find(Company.class, id));
+  private void setBindParameterValues(Query hibernateQuery, org.jooq.Query jooqQuery) {
+    List<Object> values = jooqQuery.getBindValues();
+    for (int i = 0; i < values.size(); i++) {
+      hibernateQuery.setParameter(i + 1, values.get(i));
+    }
   }
-
-  @Override
-  @Transactional
-  public void deleteAll() {
-    Query query = entityManager.createQuery("DELETE FROM Company");
-    query.executeUpdate();
-  }
-
-  @Override
-  public Optional<Company> getCompanyWithPerson(Company company) {
-    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c LEFT JOIN FETCH c.persons Where c.id=:id", Company.class);
-    query.setParameter("id", company.getId());
-    return Optional.ofNullable(query.getSingleResult());
-  }
-
-  @Override
-  public List<Company> getAll() {
-    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class);
-    return query.getResultList();
-  }
-
-  @Override
-  public List<Company> getAllWithNamedGraph() {
-    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
-        .setHint(QueryHints.FETCHGRAPH, entityManager.getEntityGraph(Company.GRAPH_WITH_PERSONS));
-    List<Company> resultList = query.getResultList();
-    resultList.forEach(c -> c.getPersons().size());
-    return resultList;
-  }
-
-  @Override
-  public List<Company> getAllWithGraph() {
-    EntityGraph<Company> graph = entityManager.createEntityGraph(Company.class);
-    graph.addAttributeNodes("persons");
-    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c ", Company.class)
-        .setHint(QueryHints.FETCHGRAPH, graph);
-    List<Company> resultList = query.getResultList();
-    resultList.forEach(c -> c.getPersons().size());
-    return resultList;
-  }
-
-  @Override
-  @Transactional
-  public List<Company> getCompaniesWithPersonMax(int count) {
-    TypedQuery<Company> query = entityManager.createQuery("Select c From Company c JOIN FETCH c.persons", Company.class);
-    query.setMaxResults(count);
-    return query.getResultList();
-  }
-
-
 
 }

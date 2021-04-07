@@ -3,6 +3,9 @@ package ru.dsoccer.jooq.config;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +68,11 @@ public class SpringConfiguration {
     properties.setProperty("hibernate.query.in_clause_parameter_padding", "true");
     properties.setProperty("hibernate.jdbc.batch_size", "5");
     return properties;
+  }
+
+  @Bean
+  public DSLContext dslContext() {
+    return DSL.using(dataSource(), SQLDialect.MYSQL);
   }
 
 
