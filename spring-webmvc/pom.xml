@@ -15,6 +15,7 @@
     <module>webmvc</module>
     <module>spring-boot-mvc</module>
     <module>spring-boot-rest-resources</module>
+    <module>spring-hateoas</module>
   </modules>
 
 
