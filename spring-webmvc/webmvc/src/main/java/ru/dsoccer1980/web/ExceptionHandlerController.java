@@ -33,6 +33,12 @@ public class ExceptionHandlerController {
     return "Hi";
   }
 
+  @GetMapping("/ex/4")
+  public String exception4() {
+    simpleService.throwUncheckedIOException();
+    return "Hi";
+  }
+
   @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Data integrity violation")
   @ExceptionHandler({UnsupportedOperationException.class})
   public void handleExceptionAndResponseWithStatus() {
@@ -41,8 +47,8 @@ public class ExceptionHandlerController {
 
   @ExceptionHandler({IllegalArgumentException.class})
   @ResponseBody
-  public String handleExceptionAndReturnErrorText() {
-    return "error happened";
+  public String handleExceptionAndReturnErrorText(Exception e) {
+    return "error happened. Error:" + e.getMessage();
   }
 
   @ExceptionHandler({IllegalStateException.class})

@@ -1,5 +1,7 @@
 package ru.dsoccer1980.service;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,5 +17,9 @@ public class ThrowingExceptionsService {
 
   public void throwIllegalStateException() {
     throw new IllegalStateException("Illegal state exception");
+  }
+
+  public void throwUncheckedIOException() {
+    throw new UncheckedIOException("unchecked io  exception", new IOException("my"));
   }
 }
