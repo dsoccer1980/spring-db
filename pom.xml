@@ -19,6 +19,7 @@
     <module>grpc</module>
     <module>graphql</module>
     <module>jooq</module>
+      <module>spring-cloud</module>
   </modules>
 
 

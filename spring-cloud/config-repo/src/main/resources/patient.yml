@@ -1,0 +1,7 @@
+server:
+  port: 8085
+
+app:
+    service:
+      name: Eureka Client Example
+
