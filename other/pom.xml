@@ -15,6 +15,7 @@
     <module>jmh</module>
     <module>rabbitmq</module>
     <module>corona</module>
+    <module>feign</module>
   </modules>
 
 
